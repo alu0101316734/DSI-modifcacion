@@ -93,6 +93,7 @@ export class Racionals implements Arithmeticable<Racionals>{
 }    
 }
 
+/**@class clase get  */
 export class Racionals_get extends Racionals
 {
     constructor(private numerador_:number,private denominador_:number){
@@ -132,8 +133,8 @@ export class Complex implements Arithmeticable<Complex>
     return new Complex(i,r);
    }
    divide(n:Complex): Complex| undefined {
-      let i:number= this.i/n.i;
-      let r:number= this.r/n.r;
+      let i:number= n.i/this.i;
+      let r:number= n.r/this.r;
       return new Complex(i,r);   
    }
 }
@@ -142,36 +143,30 @@ export class Complex implements Arithmeticable<Complex>
 /**@class Adaptador de racional complejo*/
 export class Adapter extends Complex{
     /**@constructor cosntruye un racional */
-     constructor(private racional:Racionals_get){
-         super(0,0)
+     constructor( private racional:Racionals_get){
+         super(0,racional.get_numerador()/racional.get_denominador())
      }
      /**@public */
      public add(Complejo:Complex):Complex |undefined
      {
-        let r = new Complex(0,this.racional.get_numerador()/this.racional.get_denominador())
-        return Complejo.add(r);
+        return Complejo.add(this);
      }
      /**@public */
      public substract(Complejo:Complex):Complex |undefined
      {
-        let r = new Complex(0,this.racional.get_numerador()/this.racional.get_denominador())
-        return Complejo.substract(r);
+        return Complejo.substract(this);
      }
      /**@public */
      public multiply(Complejo:Complex):Complex |undefined
      {
-        const racional = this.racional.get_numerador()/this.racional.get_denominador()
-        let r = new Complex(racional,racional)
-        return Complejo.multiply(r);
+        return Complejo.multiply(this);
      }     
      /**@public */
      public divide(Complejo:Complex):Complex |undefined
      {
-        const racional = this.racional.get_numerador()/this.racional.get_denominador()
-        if (racional === 0)
-            return undefined;
-        let r = new Complex(racional,racional)
-        return Complejo.divide(r);
+        if(this.racional.get_numerador()/this.racional.get_denominador() === 0)
+          return undefined
+        return Complejo.divide(this);
      } 
 
 }

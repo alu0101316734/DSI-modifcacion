@@ -22,20 +22,22 @@ describe('Modificacion practica 7',() =>{
         const Racional = new Racionals_get(2,1)
         const Complejo = new Complex(3,2)
         let adaptador = new Adapter(Racional);
-        const resultado = new Complex(6,4);
+        const resultado = new Complex(0,4);
         expect(adaptador.multiply(Complejo)).to.deep.equal(resultado);
     })      
     it('Comprobamos  si funciona divide',() =>{
-        const Racional = new Racionals_get(2,1)
-        const Complejo = new Complex(6,4)
+        const Racional = new Racionals_get(2,4)
+        const Complejo = new Complex(1,2)
         let adaptador = new Adapter(Racional);
-        const resultado = new Complex(3,2);
+        const resultado = new Complex(0,0.25);
         expect(adaptador.divide(Complejo)).to.deep.equal(resultado);       
     })
-    it('Comprobamos si da undefined a dividir entre 0',() =>{
-        const Racional = new Racionals_get(0,1)
-        const Complejo = new Complex(6,4)
+    it('Comprobamos  si da error divide',() =>{
+        const Racional = new Racionals_get( 0,4)
+        const Complejo = new Complex(1,2)
         let adaptador = new Adapter(Racional);
-        expect(adaptador.divide(Complejo)).to.be.undefined;             
+        const resultado = new Complex(0,0.25);
+        expect(adaptador.divide(Complejo)).to.be.undefined;       
     })
+
 })
