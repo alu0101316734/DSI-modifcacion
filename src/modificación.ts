@@ -160,13 +160,17 @@ export class Adapter extends Complex{
      /**@public */
      public multiply(Complejo:Complex):Complex |undefined
      {
-        let r = new Complex(0,this.racional.get_numerador()/this.racional.get_denominador())
+        const racional = this.racional.get_numerador()/this.racional.get_denominador()
+        let r = new Complex(racional,racional)
         return Complejo.multiply(r);
      }     
      /**@public */
      public divide(Complejo:Complex):Complex |undefined
      {
-        let r = new Complex(0,this.racional.get_numerador()/this.racional.get_denominador())
+        const racional = this.racional.get_numerador()/this.racional.get_denominador()
+        if (racional === 0)
+            return undefined;
+        let r = new Complex(racional,racional)
         return Complejo.divide(r);
      } 
 
